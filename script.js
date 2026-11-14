@@ -1,4 +1,4 @@
-// Configuration
+
 const restaurantName = "Spooky Bites";
 let isOpen = true;
 let customerName = "";
@@ -12,7 +12,6 @@ const prices = {
     "Ghost Burger": 120
 };
 
-// DOM Element
 const statusElement = document.getElementById("status");
 const resultElement = document.getElementById("result");
 const customerInput = document.getElementById("customer");
@@ -22,7 +21,6 @@ const orderBtn = document.getElementById("orderBtn");
 const greetingBtn = document.getElementById("greetingBtn");
 const toggleStatusBtn = document.getElementById("toggleStatusBtn");
 
-// Display & Dynamic Status Management
 function displayStatus() {
     if (isOpen) {
         statusElement.textContent = "We are OPEN!";
@@ -38,14 +36,19 @@ function toggleRestaurantStatus() {
     displayStatus();
 }
 
-// Enhancements implementation
 function generateGreeting() {
     const name = customerInput.value.trim();
     if (!name) {
         alert("Please enter your name first!");
         return;
     }
-    alert(`Spooky Greetings, ${name}! Welcome to ${restaurantName}! 🎃👻`);
+    alert(`Spooky Greetings, ${name}! Welcome to ${restaurantName}! 🎃👻 ⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣦⠀
+⠀⠀⠀⠀⣰⣿⡟⢻⣿⡟⢻⣧
+⠀⠀⠀⣰⣿⣿⣇⣸⣿⣇⣸⣿
+⠀⠀⣴⣿⣿⣿⣿⠟⢻⣿⣿⣿
+⣠⣾⣿⣿⣿⣿⣿⣤⣼⣿⣿⠇
+⢿⡿⢿⣿⣿⣿⣿⣿⣿⣿⡿⠀
+⠀⠀⠈⠿⠿⠋⠙⢿⣿⡿⠁⠀`);
 }
 
 function recommendMeal(subtotal) {
@@ -61,7 +64,6 @@ function placeOrder() {
     const selectedMeal = mealSelect.value;
     quantity = Number(quantityInput.value);
 
-    // Validation
     if (!customerName) {
         resultElement.textContent = "Please enter your name first!";
         return;
@@ -77,35 +79,32 @@ function placeOrder() {
         return;
     }
 
-    // Confirmation Box
     const confirmChoice = confirm(`Confirm order for ${quantity} x ${selectedMeal}?`);
     if (!confirmChoice) {
         resultElement.textContent = "Order process cancelled.";
         return;
     }
 
-    // Calculation & Discount
     mealPrice = prices[selectedMeal];
     let subtotal = mealPrice * quantity;
     let discount = 0;
 
     if (subtotal >= 300) {
-        discount = subtotal * 0.10; // 10% Discount
+        discount = subtotal * 0.10; 
     }
 
     total = subtotal - discount;
 
     const recommendation = recommendMeal(subtotal);
 
-    // Display
     resultElement.innerHTML = `
-        <strong>Thank you, ${customerName}!</strong><br>
+        <strong>Thank you for ordering, ${customerName}!</strong><br>
         Order: ${quantity} x ${selectedMeal}(s)<br>
         Subtotal: ₱${subtotal.toFixed(2)}<br>
-        ${discount > 0 ? `Discount (10%): -₱${discount.toFixed(2)}<br>` : ''}
+        ${discount > 0 ? `10% Discount: -₱${discount.toFixed(2)}<br>` : ''}
         <strong>Final Total: ₱${total.toFixed(2)}</strong><br>
         <em>${recommendation}</em><br>
-        Enjoy your spooky meal! 🎃
+        Enjoy your spooky meal! NYAHAHAHAHA 🎃
     `;
 }
 
@@ -113,7 +112,6 @@ function showMenuMessage() {
     alert(`Welcome to ${restaurantName}! Choose your spooky meal from our menu below.`);
 }
 
-// Event Listeners
 displayStatus();
 orderBtn.addEventListener("click", placeOrder);
 greetingBtn.addEventListener("click", generateGreeting);
